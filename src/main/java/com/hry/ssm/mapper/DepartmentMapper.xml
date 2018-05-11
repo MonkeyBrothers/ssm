@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hry.ssm.mapper.DepartmentMapper" >
   <resultMap id="BaseResultMap" type="com.hry.ssm.pojo.Department" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="dept_id" property="deptId" jdbcType="INTEGER" />
     <result column="deptname" property="deptname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, deptname
+    dept_id, deptname
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hry.ssm.pojo.DepartmentExample" >
     select
@@ -84,11 +84,11 @@
     select 
     <include refid="Base_Column_List" />
     from department
-    where id = #{id,jdbcType=INTEGER}
+    where dept_id = #{deptId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from department
-    where id = #{id,jdbcType=INTEGER}
+    where dept_id = #{deptId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.hry.ssm.pojo.DepartmentExample" >
     delete from department
@@ -97,22 +97,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hry.ssm.pojo.Department" >
-    insert into department (id, deptname)
-    values (#{id,jdbcType=INTEGER}, #{deptname,jdbcType=VARCHAR})
+    insert into department (dept_id, deptname)
+    values (#{deptId,jdbcType=INTEGER}, #{deptname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hry.ssm.pojo.Department" >
     insert into department
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
+      <if test="deptId != null" >
+        dept_id,
       </if>
       <if test="deptname != null" >
         deptname,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+      <if test="deptId != null" >
+        #{deptId,jdbcType=INTEGER},
       </if>
       <if test="deptname != null" >
         #{deptname,jdbcType=VARCHAR},
@@ -128,8 +128,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update department
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.deptId != null" >
+        dept_id = #{record.deptId,jdbcType=INTEGER},
       </if>
       <if test="record.deptname != null" >
         deptname = #{record.deptname,jdbcType=VARCHAR},
@@ -141,7 +141,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update department
-    set id = #{record.id,jdbcType=INTEGER},
+    set dept_id = #{record.deptId,jdbcType=INTEGER},
       deptname = #{record.deptname,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -154,11 +154,11 @@
         deptname = #{deptname,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where dept_id = #{deptId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hry.ssm.pojo.Department" >
     update department
     set deptname = #{deptname,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where dept_id = #{deptId,jdbcType=INTEGER}
   </update>
 </mapper>

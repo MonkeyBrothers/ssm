@@ -1,18 +1,18 @@
 package com.hry.ssm.pojo;
 
 public class Department {
-    /**  */
-    private Integer id;
+    /** 主键 */
+    private Integer deptId;
 
-    /**  */
+    /** 部门名称 */
     private String deptname;
 
-    public Integer getId() {
-        return id;
+    public Integer getDeptId() {
+        return deptId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 
     public String getDeptname() {

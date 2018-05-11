@@ -1,6 +1,5 @@
 package com.hry.test;
 
-import com.hry.ssm.mapper.UserMapper;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
