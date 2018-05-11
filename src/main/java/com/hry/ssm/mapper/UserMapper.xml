@@ -70,6 +70,10 @@
   <sql id="Base_Column_List" >
     u_id, username, password, email, gender, dept_id
   </sql>
+  <!--编辑的根据条件查询时候连同所在部门一块查询-->
+  <sql id="WithDept_Column_List" >
+    u.u_id, u.username, u.password, u.gender, u.email, u.dept_id, d.deptname
+  </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hry.ssm.pojo.UserExample" >
     select
     <if test="distinct" >
@@ -84,6 +88,25 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!--编辑的根据条件查询时候连同所在部门一块查询-->
+  <select id="selectByExampleWithDept" resultMap="BaseResultMap" parameterType="com.hry.ssm.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="WithDept_Column_List" />
+    FROM
+    USER AS u
+    LEFT JOIN department d ON d.dept_id = u.dept_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
