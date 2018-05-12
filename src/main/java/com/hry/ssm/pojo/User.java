@@ -19,6 +19,21 @@ public class User {
     /** 用户所属部门 */
     private Integer deptId;
 
+    /** 增加部门属性*/
+    private Department department;
+
+    public User() {
+    }
+
+    public User(Integer uId, String username, String password, String email, String gender, Integer deptId) {
+        this.uId = uId;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.gender = gender;
+        this.deptId = deptId;
+    }
+
     public Integer getuId() {
         return uId;
     }
@@ -29,6 +44,14 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public void setUsername(String username) {
