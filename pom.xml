@@ -100,7 +100,17 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.8.13</version>
     </dependency>
-
+    <!--添加日志信息-->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.12</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.21</version>
+    </dependency>
 
   </dependencies>
 
@@ -108,10 +118,14 @@
     <resources>
       <resource>
         <directory>src/main/java</directory>
+        <!-- 此配置不可缺，否则mybatis的Mapper.xml将会丢失 -->
         <includes>
           <include>**/*.xml</include>
         </includes>
-        <filtering>true</filtering>
+      </resource>
+      <!--指定资源的位置-->
+      <resource>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
 

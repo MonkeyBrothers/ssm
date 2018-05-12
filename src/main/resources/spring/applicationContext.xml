@@ -35,12 +35,12 @@
     </bean>
     <!-- 配置扫描包，加载mapper代理对象 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.hry.mapper"></property>
+        <property name="basePackage" value="com.hry.ssm.mapper"></property>
     </bean>
 
     <!--=============================================配置service==================================-->
     <!-- 扫描包加载Service实现类 -->
-    <context:component-scan base-package="com.hry.service"></context:component-scan>
+    <context:component-scan base-package="com.hry.ssm.service"></context:component-scan>
 
     <!--=============================================配置transaction事物==================================-->
     <!-- 事务管理器 -->
@@ -66,7 +66,7 @@
     </tx:advice>
     <!-- 切面 -->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.hry.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.hry.ssm.service.*.*(..))" />
     </aop:config>
 
     <!--===========================================配置redis================================-->

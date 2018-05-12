@@ -1,5 +1,7 @@
 package com.hry.test;
 
+import com.hry.ssm.mapper.UserMapper;
+import com.hry.ssm.pojo.User;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -22,9 +24,9 @@ public class TestMapper {
     public void testCurd() {
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-        for (int i = 0; i < 1000; i++) {
-            String uname = UUID.randomUUID().toString().substring(0, 5).replace("-", "");
-//            mapper.insert(new User(null, uname, "123"));
+        for (int i = 0; i < 50; i++) {
+            String username = UUID.randomUUID().toString().substring(0, 5).replace("-", "");
+            mapper.insertSelective(new User(null, username + "hry", "123", username + "@qq.com", "male", 1));
             sqlSession.commit();
         }
         System.out.println("批量成功");

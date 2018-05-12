@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!--扫描controller的包-->
-	<context:component-scan base-package="com.hry.controller" />
+	<context:component-scan base-package="com.hry.ssm.controller" />
 	<!--使用这个配置会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,
 	是spring MVC为@Controllers分发请求所必须的，即解决了@Controller注解使用的前提配置。
 	刚开始学习的时候都是手动配置的，后来为了简便，就是用了简便的写法，因为简便所以很容易忽略-->
