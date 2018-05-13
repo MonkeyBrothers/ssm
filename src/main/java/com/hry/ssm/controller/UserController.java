@@ -20,7 +20,7 @@ public class UserController {
     @RequestMapping("/user")
     public String findAllUsers(@RequestParam(value = "pageNumber", defaultValue = "1") Integer pageNumber, Model model) {
         // 设置页码，和每页大小
-        PageHelper.startPage(pageNumber, 5);
+        PageHelper.startPage(pageNumber, 3);
         List<User> allUsers = userService.findAllUsers();
         // 利用pageInfo进行封装  详细信息
         PageInfo pageInfo = new PageInfo(allUsers, 5);

@@ -1,16 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ^_^
-  Date: 2018/5/7
-  Time: 21:36
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page  isELIgnored="false"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/fonts/bootstrap.min.css" >
-    <title>Title</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/fonts/bootstrap.min.css" >
+    <title>学习增删改查</title>
 </head>
 <body>
 <div class="container">
@@ -40,22 +39,29 @@
                     <th>操作</th> 
                 </tr>
 
+                <c:forEach items="${pageInfo.list}" var="user" >
 
-                <tr>
-                    <th>1</th>
-                    <th>侯瑞阳</th>
-                    <th>男</th>
-                    <th>2507511047@qq.com</th>
-                    <th>开发部</th>
-                    <th>
-                        <button class="btn btn-success btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                        编辑</button>
-                        <button class="btn btn-danger btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            删除</button>
-                    </th>
-                </tr>
+                    <tr>
+                        <th>${user.uId}</th>
+                        <th>${user.username}</th>
+                        <th>${user.gender == "m"? "男" : "女"}</th>
+                        <th>${user.email}</th>
+                        <th>${user.department.deptname}</th>
+                        <th>
+                            <button class="btn btn-success btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                编辑</button>
+                            <button class="btn btn-danger btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                删除</button>
+                        </th>
+                    </tr>
+
+
+
+
+                </c:forEach>
+
             </table>
         </div>
     </div>
