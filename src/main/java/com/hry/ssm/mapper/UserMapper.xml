@@ -111,7 +111,7 @@
     <include refid="WithDept_Column_List" />
     FROM
     USER AS u
-    LEFT JOIN department d ON d.dept_id = u.dept_id
+    LEFT JOIN department d ON u.dept_id = d.dept_id
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

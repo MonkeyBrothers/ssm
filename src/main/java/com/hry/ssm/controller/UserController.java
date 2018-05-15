@@ -35,7 +35,7 @@ public class UserController {
         PageHelper.startPage(pageNumber, 3);
         List<User> userList = userService.findAllUsers();
         // 连续显示页数
-        PageInfo pageInfo = new PageInfo(userList, 5);
+        PageInfo pageInfo = new PageInfo(userList, 3);
         return Message.success().add("pageInfo", pageInfo);
     }
 

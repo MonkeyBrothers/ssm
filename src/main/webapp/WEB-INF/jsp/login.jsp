@@ -8,7 +8,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="/fonts/bootstrap.min.css" >
+
     <title>学习增删改查</title>
 </head>
 <body>
