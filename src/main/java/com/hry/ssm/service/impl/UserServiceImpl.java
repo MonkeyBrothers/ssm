@@ -22,4 +22,33 @@ public class UserServiceImpl implements UserService {
         List<User> userList = userMapper.selectByExampleWidthDept(null);
         return userList;
     }
+
+    /**
+     * 保存用户信息
+     * @return
+     */
+    @Override
+    public void saveUser(User user) {
+        userMapper.insertSelective(user);
+    }
+
+    /**
+     * 根据ID查询用户信息
+     * @param id
+     * @return
+     */
+    @Override
+    public User getUser(int id) {
+        User user = userMapper.selectByPrimaryKey(id);
+        return user;
+    }
+
+    /**
+     * 修改员工信息
+     * @param user
+     */
+
+    public void updateUser(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
 }
