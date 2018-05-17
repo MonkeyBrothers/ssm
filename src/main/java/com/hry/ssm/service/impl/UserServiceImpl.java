@@ -2,6 +2,7 @@ package com.hry.ssm.service.impl;
 
 import com.hry.ssm.mapper.UserMapper;
 import com.hry.ssm.pojo.User;
+import com.hry.ssm.pojo.UserExample;
 import com.hry.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,26 @@ public class UserServiceImpl implements UserService {
 
     public void updateUser(User user) {
         userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
+     * 根据主键删除单个用户信息
+     * @param id
+     */
+    @Override
+    public void deleteUser(int id) {
+        userMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 批量删除信息
+     * @param ids
+     */
+    @Override
+    public void deleteBatch(List<Integer> ids) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andUIdIn(ids);
+        userMapper.deleteByExample(example);
     }
 }

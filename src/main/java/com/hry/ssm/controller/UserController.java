@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -67,6 +68,32 @@ public class UserController {
     @RequestMapping(value = "/user/{uId}", method = RequestMethod.PUT)
     public Message updateUser(User user) {
         userService.updateUser(user);
+        return Message.success();
+    }
+
+    /**
+     * 单个多个二合一
+     *
+     */
+    @ResponseBody
+    @RequestMapping(value = "/user/{ids}", method = RequestMethod.DELETE)
+    public Message deleteUser(@PathVariable("ids") String ids) {
+        // 判断是不是有“-” 进行批量删除
+        if (ids.contains("-")) {
+            // 创建一个数组接受要删除的id
+            List<Integer> del_ids = new ArrayList<>();
+            // 分割或得到的字符串
+            String[] str_ids = ids.split("-");
+            for (String string : str_ids) {
+                // 把分割好的放进数组中
+                del_ids.add(Integer.parseInt(string));
+            }
+            // 调用批量删除方法
+            userService.deleteBatch(del_ids);
+        } else {
+            Integer id = Integer.parseInt(ids);
+            userService.deleteUser(id);
+        }
         return Message.success();
     }
 

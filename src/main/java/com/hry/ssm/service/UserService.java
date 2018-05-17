@@ -20,4 +20,12 @@ public interface UserService {
      * 修改员工信息
      */
     void updateUser(User user);
+    /**
+     * 删除单个员工信息
+     */
+    void deleteUser(int id);
+    /**
+     * 批量删除员工
+     */
+    void deleteBatch(List<Integer> ids);
 }

@@ -152,7 +152,7 @@
     <div class="row">
         <div class="col-md-12 col-md-offset-9">
             <button class="btn btn-success" id="add_user_model_btn">增加</button>
-            <button class="btn btn-danger">删除</button>
+            <button class="btn btn-danger" id="delete_selectUser_btn">删除</button>
         </div>
     </div>
     <div class="row">
@@ -160,6 +160,7 @@
             <table class="table table-hover" id="user_table">
                <thead>
                    <tr>
+                       <th><input type="checkbox" id="checked-input"></th>
                        <th>ID</th>
                        <th>empName</th>
                        <th>gender</th>
@@ -217,6 +218,7 @@
         var users = result.extend.pageInfo.list;
         // 循环遍历
         $.each(users, function (index, item) {
+            var checkBoxTd = $("<td><input type='checkbox' class='checked-items'> </td>")
             var userId = $("<td></td>").append(item.uId);
             var userName = $("<td></td>").append(item.username);
             var email = $("<td></td>").append(item.email);
@@ -230,12 +232,13 @@
             editBtn.attr("edit-id", item.uId);
             var delBtn = $("<button></button>")
                 // 添加样式
-                .addClass("btn btn-danger btn-primary btn-sm")
+                .addClass("btn btn-danger btn-primary btn-sm delete-btn")
                 .append("<span></span>")
                 .addClass("glyphicon glyphicon-trash").append("删除");
-
+            delBtn.attr("delete-btn", item.uId);
             var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
-            $("<tr></tr>").append(userId)
+            $("<tr></tr>").append(checkBoxTd)
+                .append(userId)
                 .append(userName)
                 .append(gender)
                 .append(email)
@@ -382,7 +385,7 @@
             }
         });
     }
-
+    // 更新按钮功能
     $("#update_user_btn").click(function () {
        $.ajax({
            url:"/user/"+$(this).attr("edit-id"),
@@ -392,8 +395,54 @@
                $("#updateUserModel").modal("hide");
                to_page(currentPage);
            }
-
        });
+    });
+    // 删除功能
+    $(document).on("click", ".delete-btn", function () {
+        //
+        var usernameId = $(this).attr("delete-btn");
+        var userName = $(this).parents("tr").find("td:eq(2)").text();
+        if (confirm("确认删除【"+ userName +"】吗？")) {
+            // 确认删除发送ajax
+            $.ajax({
+                url:"/user/"+ usernameId,
+                type:"DELETE",
+                success:function (result) {
+                    alert(result.message);
+                    to_page(currentPage);
+                }
+            });
+        }
+    });
+    // 完成全选全不选
+    $("#checked-input").click(function () {
+        $(".checked-items").prop("checked", $(this).prop("checked"));
+    });
+    $(document).on("click", ".checked-items",function () {
+        var flag = $(".checked-items:checked").length==$(".checked-items").length;
+        $("#checked-input").prop("checked", flag);
+    })
+    // 点击全部删除就完成批量删除
+    $("#delete_selectUser_btn").click(function () {
+        var userNames = "";
+        var del_idstr = "";
+        $.each($(".checked-items:checked"), function () {
+            userNames += $(this).parents("tr").find("td:eq(2)").text() + ",";
+            del_idstr += $(this).parents("tr").find("td:eq(1)").text() + "-";
+        });
+        userNames = userNames.substring(0, userNames.length-1);
+        del_idstr = del_idstr.substring(0, del_idstr.length-1);
+        if(confirm("确认删除【"+ userNames+"】吗？")){
+            // 发送Ajax请求
+            $.ajax({
+               url:"/user/"+del_idstr,
+               type:"DELETE",
+               success:function (result) {
+                   alert(result.message);
+                   to_page(currentPage);
+               }
+            });
+        }
     });
     
 </script>
